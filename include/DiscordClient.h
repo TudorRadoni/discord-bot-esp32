@@ -3,18 +3,40 @@
 
 #include <WiFiClientSecure.h>
 #include <HTTPClient.h>
+#include <WebSocketsClient.h>
 #include <ArduinoJson.h>
 #include <Arduino.h>
 
 class DiscordClient {
 private:
-  WiFiClientSecure client;
+  WiFiClientSecure httpClient;
+  WebSocketsClient webSocket;
   String lastMessageId;
-  unsigned long lastPollTime;
-  static const unsigned long POLL_INTERVAL = 10000; // 10 seconds
+  String sessionId;
+  String gatewayUrl;
+  int sequenceNumber;
+  unsigned long lastHeartbeat;
+  unsigned long heartbeatInterval;
+  unsigned long lastReconnectAttempt;
+  int connectionAttempts;
+  unsigned long lastConnectionTime;
+  unsigned long lastReadyTime;
+  bool isConnected;
+  bool isAuthenticated;
   
   // Helper methods
-  bool parseMessage(const String& response, String& messageId, String& content, String& authorId, bool& isBot);
+  void getGatewayUrl();
+  void connectWebSocket();
+  void sendHeartbeat();
+  void sendIdentify();
+  void sendResume();
+  void handleWebSocketEvent(WStype_t type, uint8_t * payload, size_t length);
+  void handleDiscordMessage(const String& eventType, JsonDocument& data);
+  void processMessage(JsonDocument& messageData);
+  
+  // Static callback for WebSocket events
+  static void webSocketEvent(WStype_t type, uint8_t * payload, size_t length);
+  static DiscordClient* instance; // For static callback
   
 public:
   DiscordClient();
@@ -24,8 +46,8 @@ public:
   void update();
   bool sendMessage(const String& message);
   
-  // Message handling
-  void pollMessages();
+  // Connection management
+  bool isWebSocketConnected() const { return isConnected && isAuthenticated; }
   
 private:
   void processNewMessage(const String& message);

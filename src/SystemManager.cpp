@@ -21,8 +21,8 @@ void SystemManager::begin() {
   initialized = true;
   Serial.println("System initialization complete!");
   
-  // Send initial poll
-  discordClient.pollMessages();
+  // WebSocket connection is initiated in DiscordClient::begin()
+  Serial.println("Discord WebSocket connection initiated");
 }
 
 void SystemManager::update() {

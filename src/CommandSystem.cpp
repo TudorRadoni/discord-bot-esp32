@@ -73,7 +73,8 @@ void CommandSystem::statusCommand() {
   String status = "✅ **System Status:**\n";
   status += "🖥️ PC: " + String(systemManager.isOnline() ? "Online" : "Offline") + "\n";
   status += "💡 LED: " + String(neoPixelManager.isEnabled() ? "Enabled" : "Disabled") + "\n";
-  status += "🌈 Mode: " + String(neoPixelManager.isRainbowMode() ? "Rainbow" : "Static");
+  status += "🌈 Mode: " + String(neoPixelManager.isRainbowMode() ? "Rainbow" : "Static") + "\n";
+  status += "🔗 WebSocket: " + String(discordClient.isWebSocketConnected() ? "Connected" : "Disconnected");
   
   discordClient.sendMessage(status);
 }

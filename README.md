@@ -47,10 +47,11 @@ This project follows clean software design principles with clear separation of c
 - **Built-in Help**: Automatic command documentation
 
 ### 📡 Discord Integration
-- **Real-time Polling**: Monitors channel for new messages
+- **Real-time WebSocket**: Uses Discord Gateway API for instant message reception
 - **Rich Responses**: Emoji-enhanced status messages
-- **Error Handling**: Graceful failure recovery
-- **SSL Security**: Secure HTTPS communication
+- **Error Handling**: Graceful failure recovery with auto-reconnection
+- **SSL Security**: Secure WebSocket and HTTPS communication
+- **Heartbeat System**: Maintains persistent connection to Discord
 
 ## Setup Instructions
 
