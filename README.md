@@ -15,7 +15,7 @@ This project follows clean software design principles with clear separation of c
 
 ### File Structure
 
-```
+```txt
 ├── include/
 │   ├── config.h              # Your credentials (gitignored)
 │   ├── config.h.template     # Template for setup
@@ -35,18 +35,21 @@ This project follows clean software design principles with clear separation of c
 ## ✨ Features
 
 ### 🌈 LED Control
+
 - **Rainbow Mode**: Continuous color cycling (default)
 - **Static Colors**: Red, green, blue, white
 - **Smart Feedback**: Visual confirmation for commands
 - **Power Control**: Complete on/off functionality
 
 ### 🎛️ Command System
+
 - **Modular Design**: Easy to add new commands
 - **Callback Architecture**: Clean separation of command logic
 - **Case Insensitive**: Works with or without `/` prefix
 - **Built-in Help**: Automatic command documentation
 
 ### 📡 Discord Integration
+
 - **Real-time WebSocket**: Uses Discord Gateway API for instant message reception
 - **Rich Responses**: Emoji-enhanced status messages
 - **Error Handling**: Graceful failure recovery with auto-reconnection
@@ -67,7 +70,7 @@ cp src/config.cpp.template src/config.cpp
 Edit both `include/config.h` (if needed) and `src/config.cpp` with your actual credentials:
 
 - `YOUR_WIFI_SSID`: Your WiFi network name
-- `YOUR_WIFI_PASSWORD`: Your WiFi password  
+- `YOUR_WIFI_PASSWORD`: Your WiFi password
 - `YOUR_DISCORD_BOT_TOKEN`: Your Discord bot token
 - `YOUR_DISCORD_CHANNEL_ID`: Your Discord channel ID
 
@@ -106,20 +109,21 @@ platformio run --target upload
 
 ## 🎮 Available Commands
 
-| Command | Description | LED Effect |
-|---------|-------------|------------|
-| `status` | Show system status | None |
-| `turn_on` | Simulate PC power on | Green flash |
-| `turn_off` | Simulate PC power off | Red flash |
-| `rainbow` | Enable rainbow mode | Rainbow cycle |
-| `red` | Set LED to red | Solid red |
-| `green` | Set LED to green | Solid green |
-| `blue` | Set LED to blue | Solid blue |
-| `white` | Set LED to white | Solid white |
-| `off` | Turn off LED | LED off |
-| `help` | Show all commands | None |
+| Command    | Description           | LED Effect    |
+| ---------- | --------------------- | ------------- |
+| `status`   | Show system status    | None          |
+| `turn_on`  | Simulate PC power on  | Green flash   |
+| `turn_off` | Simulate PC power off | Red flash     |
+| `rainbow`  | Enable rainbow mode   | Rainbow cycle |
+| `red`      | Set LED to red        | Solid red     |
+| `green`    | Set LED to green      | Solid green   |
+| `blue`     | Set LED to blue       | Solid blue    |
+| `white`    | Set LED to white      | Solid white   |
+| `off`      | Turn off LED          | LED off       |
+| `help`     | Show all commands     | None          |
 
 ### Usage Tips
+
 - Commands are case-insensitive
 - You can use commands with or without `/` prefix
 - LED starts in rainbow mode by default
@@ -133,6 +137,7 @@ platformio run --target upload
 - WiFi network connection
 
 ### Wiring
+
 - NeoPixel Data → GPIO 2
 - NeoPixel Power Enable → GPIO 4
 - NeoPixel VCC → 3.3V or 5V
@@ -143,22 +148,25 @@ platformio run --target upload
 ### Adding New Commands
 
 1. **Declare the callback** in `CommandSystem.h`:
+
    ```cpp
    static void myNewCommand();
    ```
 
 2. **Implement the function** in `CommandSystem.cpp`:
-   ```cpp
-   void CommandSystem::myNewCommand() {
-       // Your command logic here
-       discordClient.sendMessage("Command executed!");
-   }
-   ```
+
+    ```cpp
+    void CommandSystem::myNewCommand() {
+        // Your command logic here
+        discordClient.sendMessage("Command executed!");
+    }
+    ```
 
 3. **Register the command** in `SystemManager.cpp`:
-   ```cpp
-   commandSystem.addCommand("mycommand", "Description", CommandSystem::myNewCommand);
-   ```
+
+    ```cpp
+    commandSystem.addCommand("mycommand", "Description", CommandSystem::myNewCommand);
+    ```
 
 ### Adding New LED Effects
 
