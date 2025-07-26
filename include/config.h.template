@@ -1,0 +1,15 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+// WiFi credentials
+extern const char* WIFI_SSID;
+extern const char* WIFI_PASSWORD;
+
+// Discord Bot Token and Channel ID
+extern const char* DISCORD_BOT_TOKEN;
+extern const char* DISCORD_CHANNEL_ID;
+
+// Discord API URL for getting messages
+extern const char* DISCORD_API_URL;
+
+#endif

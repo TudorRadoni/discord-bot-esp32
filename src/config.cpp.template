@@ -1,0 +1,12 @@
+#include "config.h"
+
+// WiFi credentials
+const char* WIFI_SSID = "YOUR_WIFI_SSID";
+const char* WIFI_PASSWORD = "YOUR_WIFI_PASSWORD";
+
+// Discord Bot Token and Channel ID
+const char* DISCORD_BOT_TOKEN = "YOUR_DISCORD_BOT_TOKEN";
+const char* DISCORD_CHANNEL_ID = "YOUR_DISCORD_CHANNEL_ID";
+
+// Discord API URL for getting messages
+const char* DISCORD_API_URL = "https://discord.com/api/v9/channels/";
