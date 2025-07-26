@@ -24,6 +24,7 @@ This project follows clean software design principles with clear separation of c
 │   ├── NeoPixelManager.h     # LED control and animations
 │   └── CommandSystem.h       # Command system interface
 ├── src/
+│   ├── config.cpp            # Your credentials (gitignored)
 │   ├── main.cpp              # Entry point (minimal)
 │   ├── SystemManager.cpp     # System initialization & coordination
 │   ├── DiscordClient.cpp     # Discord API implementation
